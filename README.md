@@ -12,7 +12,7 @@ This package make REST API Tests easy.
 
 ### import package
 ```ts
-import { Method, ApiTest } from "https://deno.land/x/apitest@0.1.0/mod.ts"
+import { Method, ApiTest } from "https://deno.land/x/apitest@0.1.2/mod.ts"
 ```
 
 ### new Instance by base URL
@@ -40,6 +40,13 @@ Deno.test("Not Found Test", async () => {
         path: '/not',
         expectedHTTPStatus: 404,
         expected: "Not Found"
+    })
+})
+
+Deno.test("Receive Object Test", async () => {
+    await api.assert({
+        path: '/object',
+        expected: { name: "hello", age: 10 }
     })
 })
 ```

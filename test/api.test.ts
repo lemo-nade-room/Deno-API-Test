@@ -1,4 +1,4 @@
-import { Method, ApiTest } from "https://deno.land/x/apitest@0.1.0/mod.ts"
+import { Method, ApiTest } from "https://deno.land/x/apitest@0.1.2/mod.ts"
 
 const api = new ApiTest('http://localhost:8000')
 
