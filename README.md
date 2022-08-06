@@ -7,18 +7,24 @@ This software is released under the MIT License, see LICENSE.
 This package make REST API Tests easy.
 
 ## Usage
-new Instance by base URL
+
+[example code](./test/api.test.ts)
+
+### import package
+```ts
+import { Method, ApiTest } from "https://deno.land/x/apitest@0.1.0/mod.ts"
+```
+
+### new Instance by base URL
 ```ts
 const api = new ApiTest('https://xxxx.com')
 ```
 
-test server
-
+### Test Server
 To "baseURL + path" with method and parameter
-
 ```ts
 Deno.test("Send Object Test", async () => {
-    await test.assert({
+    await api.assert({
         path: '/object',
         method: Method.PATCH,
         parameter: { first: "Tom", last: "Riddle" },
@@ -26,15 +32,22 @@ Deno.test("Send Object Test", async () => {
 })
 ```
 
+### Assert
 assertEquals, by expected status (default 200) and expected body (default empty)
 ```ts
 Deno.test("Not Found Test", async () => {
-    await test.assert({
+    await api.assert({
         path: '/not',
         expectedHTTPStatus: 404,
         expected: "Not Found"
     })
 })
+```
+
+### Execute
+in terminal
+```shell
+deno test --allow-net
 ```
 
 ## What this package can't do
