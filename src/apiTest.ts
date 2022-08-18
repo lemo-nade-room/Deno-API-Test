@@ -6,9 +6,9 @@ export interface AssertArgument {
     path?: string
     method?: Method | string
     headers?: Headers,
-    parameter?: string | Record<string, unknown>
+    parameter?: string | Record<string, unknown> | Array<string> | Array<Record<string, unknown>>
     expectedHTTPStatus?: number
-    expected?: string | Record<string, unknown>
+    expected?: string | Record<string, unknown> | Array<string> | Array<Record<string, unknown>>
 }
 
 const method = (arg: Method | string | undefined): string => {
@@ -17,13 +17,13 @@ const method = (arg: Method | string | undefined): string => {
     return arg.value
 }
 
-const body = (arg: string | Record<string, unknown> | undefined): string | undefined => {
+const body = (arg: string | Record<string, unknown> | undefined | Array<string> | Array<Record<string, unknown>>): string | undefined => {
     if (arg === undefined) return undefined
     if (typeof arg === 'string') return arg
     return JSON.stringify(arg)
 }
 
-const assertValue = async (response: Response, expected: string | Record<string, unknown>): Promise<void> => {
+const assertValue = async (response: Response, expected: string | Record<string, unknown> | Array<string> | Array<Record<string, unknown>>): Promise<void> => {
     if (typeof expected === 'string') {
         assertEquals(await response.text(), expected)
     } else {
